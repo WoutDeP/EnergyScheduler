@@ -1,0 +1,76 @@
+{
+  "devices": [
+
+  ],
+  "schedule": [
+
+  ],
+  "templateDevices": [
+
+  ],
+  "solarData": [
+    {
+      "id": "2023-3-21",
+      "watt_hours_period": [
+        {
+          "timeForWattage": "06:41:00",
+          "wattage": 0
+        },
+        {
+          "timeForWattage": "07:00:00",
+          "wattage": 19
+        },
+        {
+          "timeForWattage": "08:00:00",
+          "wattage": 179
+        },
+        {
+          "timeForWattage": "09:00:00",
+          "wattage": 286
+        },
+        {
+          "timeForWattage": "10:00:00",
+          "wattage": 360
+        },
+        {
+          "timeForWattage": "11:00:00",
+          "wattage": 419
+        },
+        {
+          "timeForWattage": "12:00:00",
+          "wattage": 488
+        },
+        {
+          "timeForWattage": "13:00:00",
+          "wattage": 859
+        },
+        {
+          "timeForWattage": "14:00:00",
+          "wattage": 1372
+        },
+        {
+          "timeForWattage": "15:00:00",
+          "wattage": 1515
+        },
+        {
+          "timeForWattage": "16:00:00",
+          "wattage": 1398
+        },
+        {
+          "timeForWattage": "17:00:00",
+          "wattage": 1111
+        },
+        {
+          "timeForWattage": "18:00:00",
+          "wattage": 685
+        },
+        {
+          "timeForWattage": "18:57:00",
+          "wattage": 219
+        }
+      ]
+    }
+  ],
+  "options": {
+  }
+}

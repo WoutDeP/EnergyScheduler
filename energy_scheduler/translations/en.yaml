@@ -1,0 +1,19 @@
+configuration:
+  auth_token:
+    name: Authentication token
+    description: Your Long-Lived Acces Token, you can create one in your ha account.
+  latitude:
+    name: Latitude
+    description: The latitude of your solar panels location.
+  longitude:
+    name: Longitude
+    description: The longitude of your solar panels location.
+  declination:
+    name: Declination
+    description: The declination of your solar panels.
+  azimuth:
+    name: Azimuth
+    description: The horizontal angle of your solar panels.
+  kwph:
+    name: Kilowatt hours
+    description: Max produces energy from your solar panels.

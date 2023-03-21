@@ -1,0 +1,33 @@
+name: "Energy Scheduler"
+description: "This addon shows a schedule of your devices"
+version: "1.0.0"
+slug: "energy_scheduler"
+init: false
+homeassistant_api: true
+hassio_api: true
+hassio_role: default
+ingress: true
+panel_icon: mdi:solar-panel
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+ports:
+  3001/tcp: 3001
+  8080/tcp: 8080
+options:
+  auth_token: null
+  latitude: null
+  longitude: null
+  declination: null
+  azimuth: null
+  kwph: null
+schema:
+  auth_token: str
+  latitude: str
+  longitude: str
+  declination: str
+  azimuth: str
+  kwph: str

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Energy Scheduler</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="index.css">
+    <script type="module" src="index.js"></script>
+    <script type="module" src="modules/deviceFunctions.js"></script>
+    <script type="module" src="modules/formFunctions.js"></script>
+    <script type="module" src="modules/energyFunctions.js"></script>
+    <script type="module" src="modules/solarDataFunctions.js"></script>
+    <script type="module" src="modules/scheduleFunctions.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+</head>
+<body>
+<h1>
+    Energy Scheduler
+</h1>
+<div class="grid-container">
+
+    <div class="grid-item">
+        <button id="addNewDevice">Add New Device</button>
+        <button id="addDevice">Add Template</button>
+        <form id="deviceForm" role="form" class="form" style="display: none">
+            <div class="form-group">
+                <div>
+                    <label for="devices"></label>
+                    <select name="devices" id="devices">
+                    </select>
+                </div>
+                <div>
+                    <label for="startTime">Start after: </label>
+                    <input id="startTime" type="time">
+                </div>
+                <div>
+                    <label for="endTime">End before: </label>
+                    <input id="endTime" type="time">
+                </div>
+                <div>
+                    <label for="consumption">Energy Consumption</label>
+                    <input id="consumption" type="number"> Watt
+                </div>
+                <div>
+                    <label for="duration">Duration</label>
+                    <input id="duration" type="number"> Minutes
+                </div>
+                <div>
+                    <label for="obligatory">Obligatory</label>
+                    <input id="obligatory" type="checkbox">
+                </div>
+                <div>
+                    <label for="importance">Importance</label>
+                    <input id="importance" type="number">
+                </div>
+                <div>
+                    <label for="splittable">Splittable</label>
+                    <input id="splittable" type="checkbox">
+                </div>
+            </div>
+            <input id="confirmForm" type="submit" value="Submit">
+        </form>
+        <form id="templateForm" role="form" class="form" style="display: none">
+            <div class="form-group">
+                <div>
+                    <label for="templateDevices"></label>
+                    <select name="templateDevices" id="templateDevices">
+                    </select>
+                </div>
+                <div>
+                    <label for="templateStartTime">Start after: </label>
+                    <input id="templateStartTime" type="time">
+                </div>
+                <div>
+                    <label for="templateEndTime">End before: </label>
+                    <input id="templateEndTime" type="time">
+                </div>
+                <div>
+                    <label for="templateConsumption">Energy Consumption</label>
+                    <input id="templateConsumption" type="number"> Watt
+                </div>
+                <div>
+                    <label for="templateDuration">Duration</label>
+                    <input id="templateDuration" type="number"> Minutes
+                </div>
+                <div>
+                    <label for="templateObligatory">Obligatory</label>
+                    <input id="templateObligatory" type="checkbox">
+                </div>
+                <div>
+                    <label for="templateImportance">Importance</label>
+                    <input id="templateImportance" type="number">
+                </div>
+                <div>
+                    <label for="templateSplittable">Splittable</label>
+                    <input id="templateSplittable" type="checkbox">
+                </div>
+            </div>
+            <input id="templateConfirmForm" type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="grid-item">
+        <h4>Devices</h4>
+        <ul id="list" class="deviceList">
+
+        </ul>
+        <div class="schedule">
+            <div>
+                <label for="startSchedule">Start: </label>
+                <input id="startSchedule" type="time">
+            </div>
+            <div>
+                <label for="endSchedule">End: </label>
+                <input id="endSchedule" type="time">
+            </div>
+            <button id="createSchedule">Create Schedule</button>
+            <div id="loader" class="loader" style="display: none"></div>
+        </div>
+        <div id="error" style="color: red; display: none">Fill in all the fields</div>
+    </div>
+</div>
+<div id="visualization"></div>
+<canvas id="myChart" style="width:100%;"></canvas>
+</body>
+</html>

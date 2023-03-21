@@ -1,0 +1,101 @@
+body {
+    margin-left: 20px;
+}
+
+#visualization {
+    width: 100%;
+    height: 100%;
+    border: 1px solid lightgray;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 50px;
+    margin-bottom: 10px;
+}
+
+/* Form */
+form div {
+    margin-left: 10px;
+    flex-direction: column;
+    padding: 5px;
+}
+
+/* Schedule */
+.schedule {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.deviceSchedule {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: auto;
+}
+
+.deviceSchedule td, .deviceSchedule th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.deviceSchedule th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+}
+
+/* Button */
+#addDevice {
+    margin-bottom: 10px;
+}
+#confirmForm #templateConfirmForm{
+    margin-left: 30px;
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: #ffffff;
+        color: #222;
+    }
+    .deviceSchedule th {
+        background-color: #dae4e7;
+        color: black;
+    }
+    .deviceSchedule tr:nth-child(even){background-color: lightgray;}
+
+    .deviceSchedule tr:hover {background-color: darkgray;}
+}
+
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    animation: spin 2s linear infinite;
+    margin-left: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #222;
+        color: #fff;
+    }
+
+    .deviceSchedule th {
+        background-color: #1c1a1a;
+        color: white;
+    }
+    .deviceSchedule tr:nth-child(even){background-color: grey;}
+    .deviceSchedule tr:nth-child(odd){background-color: dimgrey;}
+
+    .deviceSchedule tr:hover {background-color: dimgrey;}
+}
