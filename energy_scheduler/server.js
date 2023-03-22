@@ -38,6 +38,10 @@ async function getAddonInfo() {
         .catch(error => {
             console.error(error);
         });
+    console.log("Supervisor Token");
+    console.log(supervisor_token);
+    console.log("Addon Data");
+    console.log(addonData);
     dataPort = addonData.data.network["3001/tcp"];
     backendPort = addonData.data.network["8080/tcp"];
     console.log(dataPort);
