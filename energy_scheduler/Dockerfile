@@ -22,5 +22,6 @@ COPY . .
 EXPOSE 8000
 EXPOSE 8099
 EXPOSE 3001
+EXPOSE 3002
 
 CMD [ "node", "server.js" ]

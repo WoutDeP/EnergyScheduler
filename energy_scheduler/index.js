@@ -26,6 +26,8 @@ async function getOptions(){
             window.declination=data.options.declination;
             window.azimuth=data.options.azimuth;
             window.kwph=data.options.kwph;
+            window.dataPort=data.options.dataPort;
+            window.backendPort=data.options.backendPort;
         })
         .catch(error => {
             console.error('Error:', error);
@@ -38,5 +40,7 @@ await getDevices();
 await getTemplateDevices();
 await showDevices();
 await showSchedule();
+
+
 
 

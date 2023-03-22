@@ -40,12 +40,15 @@ export async function createSchedule() {
         mySolarWattageList.push(solarWattage);
     }
     error.style.display = 'none';
+    console.log("Test call naar schedule");
+    console.log(window.token);
     try {
-        await axios.post(`http://homeassistant.local:8080/api/schedule`, {
+        await axios.post(`http://homeassistant.local:${window.backendPort}/api/schedule`, {
             deviceList: window.myDevices,
             startTime: startSchedule,
             endTime: endSchedule,
-            solarWattageList: mySolarWattageList
+            solarWattageList: mySolarWattageList,
+            token: window.token
         }, {
             headers: {
                 'Authorization':
@@ -95,7 +98,7 @@ export const postSchedule = async schedule => {
             name: schedule.name,
             wattage: schedule.wattage,
             start: schedule.start,
-            end: schedule.end,
+            end: schedule.end
         }, {
             headers: {
                 'Authorization':
