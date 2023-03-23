@@ -14,12 +14,6 @@ async function getOptions(){
     })
         .then(response => response.json())
         .then(data => {
-            console.log("Data: ");
-            console.log(data);
-            console.log("Options: ");
-            console.log(data.options);
-            console.log("Token: ");
-            console.log(data.options.token);
             window.token = data.options.token;
             window.latitude = data.options.latitude;
             window.longitude=data.options.longitude;

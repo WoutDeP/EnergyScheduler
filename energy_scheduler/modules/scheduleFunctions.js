@@ -18,10 +18,6 @@ export async function createSchedule() {
         loader.style.display = 'none';
         return;
     }
-    /* [{
-         timeForWattage: "2021-08-01T07:00:00.000",
-         wattage: 1000
-     }]*/
     let wattHoursPeriod = window.solarData[0].watt_hours_period;
     let mySolarWattageList = [];
     for (let i = 0; i < wattHoursPeriod.length; i++) {
@@ -40,8 +36,6 @@ export async function createSchedule() {
         mySolarWattageList.push(solarWattage);
     }
     error.style.display = 'none';
-    console.log("Test call naar schedule");
-    console.log(window.token);
     try {
         await axios.post(`http://homeassistant.local:${window.backendPort}/api/schedule`, {
             deviceList: window.myDevices,

@@ -64,7 +64,6 @@ async function postSolarData(solarData) {
     let year = date.getFullYear();
 
     let currentDate = `${year}-${month}-${day}`;
-    console.log(currentDate);
     try {
         await axios.post(`http://homeassistant.local:3001/solarData`, {
             id: currentDate,
