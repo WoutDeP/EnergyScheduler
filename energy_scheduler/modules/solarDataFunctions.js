@@ -36,12 +36,27 @@ export async function getSolarData(latitude, longitude, declination, azimuth, kw
     let day = date.getDate();
     for (let i = 0; i < keys.length; i++) {
         if (keys[i].split(" ")[0].split("-")[2] == day) {
+            let myDate;
             let dateTime = new Date();
             dateTime.setHours(keys[i].split(" ")[1].split(":")[0]);
             dateTime.setMinutes(keys[i].split(" ")[1].split(":")[1]);
             dateTime.setSeconds(keys[i].split(" ")[1].split(":")[2]);
+            if(dateTime.toLocaleTimeString().includes("AM")){
+                myDate = dateTime.toLocaleTimeString().split(" ")[0];
+            } else if (dateTime.toLocaleTimeString().includes("PM") && dateTime.toLocaleTimeString().split(":")[0] === "12"){
+                console.log("If pm 12u");
+                myDate = dateTime.toLocaleTimeString().split(" ")[0];
+            } else if(dateTime.toLocaleTimeString().includes("PM")){
+                console.log("If met PM")
+                let dateHours = dateTime.getHours();
+                let dateMinutes = dateTime.getMinutes();
+                let dateSeconds = dateTime.getSeconds();
+                myDate = dateHours + ":" + dateMinutes + ":" + dateSeconds;
+            } else {
+                myDate = dateTime.toLocaleTimeString();
+            }
             solarToday.push({
-                timeForWattage: dateTime.toLocaleTimeString(),
+                timeForWattage: myDate,
                 wattage: values[i]
             });
         }
