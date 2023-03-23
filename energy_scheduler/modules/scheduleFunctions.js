@@ -13,6 +13,7 @@ export async function createSchedule() {
     let schedule;
     const startSchedule = document.getElementById("startSchedule").value;
     const endSchedule = document.getElementById("endSchedule").value;
+    const scheduleTime = document.getElementById("scheduleTime").value;
     if (startSchedule === "" || endSchedule === "") {
         error.style.display = 'block';
         loader.style.display = 'none';
@@ -42,7 +43,8 @@ export async function createSchedule() {
             startTime: startSchedule,
             endTime: endSchedule,
             solarWattageList: mySolarWattageList,
-            token: window.token
+            token: window.token,
+            scheduleTime: scheduleTime
         }, {
             headers: {
                 'Authorization':
