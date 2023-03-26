@@ -74,12 +74,11 @@ const postDevice = async device => {
     }
 };
 
-const putDevice = async device => {
+async function putDevice(device) {
     try {
-        await axios.put(`http://homeassistant.local:3001/devices`, {
+        await axios.put(`http://homeassistant.local:3001/devices/${device.id}`, {
             id: device.id,
             friendly_name: device.friendly_name,
-            state: device.state,
             consumption: device.consumption,
             startTime: device.startTime,
             endTime: device.endTime,
@@ -92,14 +91,16 @@ const putDevice = async device => {
                 'Authorization':
                     `Bearer ${window.token}`
             }
-        }).then(() => {
+        }).then(response => {
 
         });
     } catch (errors) {
         console.error(errors);
+        document.getElementById("error-alert").style.display = "block";
         document.getElementById("error-alert").innerHTML += "Error putting device";
     }
-};
+
+}
 
 async function deleteDevice(id) {
     try {
