@@ -26,7 +26,7 @@ const kwph = addonConfig.kwph;
 const PORT = 3001;
 
 async function getAddonInfo() {
-    let addonData;
+    /*let addonData;
     await axios.get(`http://supervisor/addons/${addon_name}/info`, {
         headers: {
             'Authorization': 'Bearer ' + supervisor_token
@@ -37,7 +37,7 @@ async function getAddonInfo() {
         })
         .catch(error => {
             console.error(error);
-        });
+        });*/
     await startServers();
     await postOptions();
 }
