@@ -1,17 +1,16 @@
-import {addTemplateDevice, showDevices, showTemplateDevices} from "./deviceFunctions.js";
+import {addTemplateDevice/*, showTemplateDevices*/} from "./deviceFunctions.js";
 
 
 document.getElementById("templateConfirmForm").addEventListener("click", async (event) => {
     event.preventDefault();
     await addTemplateDevice();
-    await showDevices();
 });
 
+document.getElementById("addNewDevice").addEventListener('click', showForm);
 
-export async function showForm() {
-    document.getElementById("deviceForm").style.display = 'block';
-    document.getElementById("templateForm").style.display = 'none';
-    const selectList = document.getElementById("devices");
+export async function showForm(device) {
+    document.getElementById("template-container").style.display = 'flex';
+    const selectList = document.getElementById("templateDevices");
     while (selectList.firstChild) {
         selectList.removeChild(selectList.firstChild);
     }
@@ -21,13 +20,31 @@ export async function showForm() {
         option.text = window.devices[i].attributes.friendly_name;
         selectList.appendChild(option);
     }
-    document.getElementById("startTime").value = 0;
-    document.getElementById("endTime").value = 0;
-    document.getElementById("consumption").value = 0;
-    document.getElementById("duration").value = 0;
-    document.getElementById("importance").value = 0;
+    if (device !== undefined) {
+        console.log(device);
+        document.getElementById("templateDevices").value = device.id;
+        document.getElementById("templateDevices").options[document.getElementById("templateDevices").selectedIndex].text = device.friendly_name;
+        document.getElementById("templateConsumption").value = device.consumption;
+        document.getElementById("templateStartTime").value = device.startTime;
+        document.getElementById("templateEndTime").value = device.endTime;
+        document.getElementById("templateDuration").value = device.duration;
+        document.getElementById("templateObligatory").checked = device.obligatory;
+        document.getElementById("templateImportance").value = device.importance;
+        document.getElementById("templateSplittable").checked = device.splittable;
+    } else {
+        document.getElementById("templateDevices").value = null;
+        document.getElementById("templateDevices").options[document.getElementById("templateDevices").selectedIndex].text = null;
+        document.getElementById("templateConsumption").value = null;
+        document.getElementById("templateStartTime").value = null;
+        document.getElementById("templateEndTime").value = null;
+        document.getElementById("templateDuration").value = null;
+        document.getElementById("templateObligatory").checked = false;
+        document.getElementById("templateImportance").value = null;
+        document.getElementById("templateSplittable").checked = false;
+    }
 }
 
+/*
 export async function showFormTemplate() {
     document.getElementById("templateForm").style.display = 'block';
     document.getElementById("deviceForm").style.display = 'none';
@@ -42,4 +59,4 @@ export async function showFormTemplate() {
         selectList.appendChild(option);
     }
     await showTemplateDevices();
-}
+}*/

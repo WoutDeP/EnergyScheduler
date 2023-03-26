@@ -23,6 +23,8 @@ export async function getSolarData(latitude, longitude, declination, azimuth, kw
                     });
                 } catch (errors) {
                     console.error(errors);
+                    document.getElementById("error-alert").style.display = "block";
+                    document.getElementById("error-alert").innerHTML += "Error getting solar data";
                 }
             }
         }
@@ -44,10 +46,8 @@ export async function getSolarData(latitude, longitude, declination, azimuth, kw
             if(dateTime.toLocaleTimeString().includes("AM")){
                 myDate = dateTime.toLocaleTimeString().split(" ")[0];
             } else if (dateTime.toLocaleTimeString().includes("PM") && dateTime.toLocaleTimeString().split(":")[0] === "12"){
-                console.log("If pm 12u");
                 myDate = dateTime.toLocaleTimeString().split(" ")[0];
             } else if(dateTime.toLocaleTimeString().includes("PM")){
-                console.log("If met PM")
                 let dateHours = dateTime.getHours();
                 let dateMinutes = dateTime.getMinutes();
                 let dateSeconds = dateTime.getSeconds();
@@ -93,6 +93,8 @@ async function postSolarData(solarData) {
         });
     } catch (errors) {
         console.error(errors);
+        document.getElementById("error-alert").style.display = "block";
+        document.getElementById("error-alert").innerHTML += "Error posting solar data";
     }
 }
 

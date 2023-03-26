@@ -135,11 +135,11 @@ export async function createEnergyComparison(allTimes, scheduleList) {
                 data: energyProduced,
                 borderColor: "green",
                 fill: false,
-                label: "Energy Produced"
+                label: "Energy Produced",
             }]
         },
         options: {
-            legend: {display: true}
+            legend: {display: true},
         }
     });
 }

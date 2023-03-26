@@ -15,15 +15,15 @@ const path = require('path');
 
 const supervisor_token = process.env.SUPERVISOR_TOKEN;
 const port = process.env.PORT || 8099; // use the port defined in the environment variable, or 8080 by default
-const addon_name = '8a8ad546_energy_scheduler';
+const addon_name = 'energy_scheduler';
 const myOptionValue = addonConfig.auth_token;
 const latitude = addonConfig.latitude;
 const longitude = addonConfig.longitude;
 const declination = addonConfig.declination;
 const azimuth = addonConfig.azimuth;
 const kwph = addonConfig.kwph;
-let dataPort;
-let backendPort;
+
+const PORT = 3001;
 
 async function getAddonInfo() {
     let addonData;
@@ -38,8 +38,6 @@ async function getAddonInfo() {
         .catch(error => {
             console.error(error);
         });
-    dataPort = addonData.data.network["3001/tcp"];
-    backendPort = addonData.data.network["8080/tcp"];
     await startServers();
     await postOptions();
 }
@@ -56,7 +54,7 @@ async function startServers(){
     server.use(middlewares);
     server.use(router);
 
-   /* const PORT = 3001;*/
+    /* const PORT = 3001;*/
 
     server.use((req, res, next) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
@@ -65,8 +63,8 @@ async function startServers(){
         next();
     });
 
-    server.listen(dataPort, () => {
-        console.log(`JSON Server is running on port ${dataPort}`);
+    server.listen(PORT, () => {
+        console.log(`JSON Server is running on port ${PORT}`);
     });
 
 
@@ -97,7 +95,7 @@ async function startServers(){
 
 
 // Run JAR application on port 8080
-    const jarProcess = exec(`java -jar demo.jar --server.port=${backendPort}`);
+    const jarProcess = exec('java -jar demo.jar --server.port=8080');
 
 
 // Log output from JAR application
@@ -117,15 +115,13 @@ async function startServers(){
 
 
 async function postOptions(){
-    axios.post(`http://homeassistant.local:${dataPort}/options`, {
+    axios.post(`http://homeassistant.local:3001/options`, {
         token: myOptionValue,
         latitude: latitude,
         longitude: longitude,
         declination: declination,
         azimuth: azimuth,
         kwph: kwph,
-        dataPort: dataPort,
-        backendPort: backendPort
     }, {
         headers: {
             'Authorization':
@@ -135,8 +131,3 @@ async function postOptions(){
 
     });
 }
-
-
-
-
-

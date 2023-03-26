@@ -12,118 +12,74 @@
     <script type="module" src="modules/scheduleFunctions.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+    <script type="text/javascript"
+            src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
 </head>
 <body>
 <h1>
     Energy Scheduler
 </h1>
-<div class="grid-container">
-    <div class="grid-item">
-        <button id="addNewDevice">Add New Device</button>
-        <button id="addDevice">Add Template</button>
-        <form id="deviceForm" role="form" class="form" style="display: none">
-            <div class="form-group">
-                <div>
-                    <label for="devices"></label>
-                    <select name="devices" id="devices">
-                    </select>
-                </div>
-                <div>
-                    <label for="startTime">Start after: </label>
-                    <input id="startTime" type="time">
-                </div>
-                <div>
-                    <label for="endTime">End before: </label>
-                    <input id="endTime" type="time">
-                </div>
-                <div>
-                    <label for="consumption">Energy Consumption</label>
-                    <input id="consumption" type="number"> Watt
-                </div>
-                <div>
-                    <label for="duration">Duration</label>
-                    <input id="duration" type="number"> Minutes
-                </div>
-                <div>
-                    <label for="obligatory">Obligatory</label>
-                    <input id="obligatory" type="checkbox">
-                </div>
-                <div>
-                    <label for="importance">Importance</label>
-                    <input id="importance" type="number">
-                </div>
-                <div>
-                    <label for="splittable">Splittable</label>
-                    <input id="splittable" type="checkbox">
-                </div>
+<div class="flex-container">
+    <div id="input-container">
+        <div class="tasks-container">
+            <div class="headertasks-container">
+                <h2>Tasks</h2>
+                <button id="addNewDevice">Add new device</button>
             </div>
-            <input id="confirmForm" type="submit" value="Submit">
-        </form>
-        <form id="templateForm" role="form" class="form" style="display: none">
-            <div class="form-group">
-                <div>
-                    <label for="templateDevices"></label>
-                    <select name="templateDevices" id="templateDevices">
-                    </select>
+            <form class="deviceSchedule-form">
+                <div class="existingtemplates-container">
+                    <ul id="templates-list">
+                    </ul>
                 </div>
-                <div>
-                    <label for="templateStartTime">Start after: </label>
-                    <input id="templateStartTime" type="time">
+                <div class="schedule">
+                    <label for="startSchedule">Start: </label>
+                    <input id="startSchedule" type="time">
+                    <label for="endSchedule">End: </label>
+                    <input id="endSchedule" type="time">
+                    <label for="scheduleTime">Time to load schedule (recommended: 30 seconds): </label>
+                    <input id="scheduleTime" type="number" value="30">
+                    <button id="createSchedule">Create Schedule</button>
+                    <div id="loader" class="loader" style="display: none"></div>
                 </div>
-                <div>
-                    <label for="templateEndTime">End before: </label>
-                    <input id="templateEndTime" type="time">
-                </div>
-                <div>
-                    <label for="templateConsumption">Energy Consumption</label>
-                    <input id="templateConsumption" type="number"> Watt
-                </div>
-                <div>
-                    <label for="templateDuration">Duration</label>
-                    <input id="templateDuration" type="number"> Minutes
-                </div>
+            </form>
+            <button style="display: none" id="current-schedule-button">View current schedule</button>
+        </div>
+        <div id="template-container" style="display: none">
+            <h2>Current template</h2>
+            <form id="templateForm" role="form" class="form">
+                <label for="templateDevices">Device*: </label>
+                <select name="templateDevices" id="templateDevices">
+                </select>
+                <label for="templateStartTime">Start after: </label>
+                <input id="templateStartTime" type="time">
+                <label for="templateEndTime">End before: </label>
+                <input id="templateEndTime" type="time">
+                <label for="templateConsumption">Energy Consumption (Wh)*</label>
+                <input id="templateConsumption" type="number">
+                <label for="templateDuration">Duration (minutes)*</label>
+                <input id="templateDuration" type="number">
+                <label for="templateImportance">Importance</label>
+                <input id="templateImportance" type="number">
                 <div>
                     <label for="templateObligatory">Obligatory</label>
                     <input id="templateObligatory" type="checkbox">
                 </div>
                 <div>
-                    <label for="templateImportance">Importance</label>
-                    <input id="templateImportance" type="number">
-                </div>
-                <div>
                     <label for="templateSplittable">Splittable</label>
                     <input id="templateSplittable" type="checkbox">
                 </div>
-            </div>
-            <input id="templateConfirmForm" type="submit" value="Submit">
-        </form>
-    </div>
-    <div class="grid-item">
-        <h4>Devices</h4>
-        <ul id="list" class="deviceList">
-
-        </ul>
-        <div class="schedule">
-            <div>
-                <label for="startSchedule">Start: </label>
-                <input id="startSchedule" type="time">
-            </div>
-            <div>
-                <label for="endSchedule">End: </label>
-                <input id="endSchedule" type="time">
-            </div>
-            <div>
-                <label for="scheduleTime">Time to load schedule: </label>
-                <input id="scheduleTime" type="number">
-            </div>
-            <button id="createSchedule">Create Schedule</button>
-            <div id="loader" class="loader" style="display: none"></div>
+                <button id="templateConfirmForm" type="submit" value="Submit">Submit</button>
+            </form>
         </div>
-        <div id="error" style="color: red; display: none">Fill in all the fields</div>
+    </div>
+    <div id="output-container" style="display: none">
+        <button id="new-schedule-button">Make new schedule</button>
+        <div id="visualization"></div>
+        <canvas id="myChart" style="width:100%;"></canvas>
     </div>
 </div>
-<div id="visualization"></div>
-<canvas id="myChart" style="width:100%;"></canvas>
+<div id="error-alert" style="display: none">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+</div>
 </body>
 </html>

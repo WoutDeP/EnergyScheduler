@@ -1,5 +1,125 @@
 body {
-    margin-left: 20px;
+    margin: 30px;
+    font-family: "Helvetica", "Arial", sans-serif;
+}
+
+button {
+    background-color: #0070C0;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+button:hover {
+    background-color: #00467A;
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label, form input, form button {
+    margin-top: 5px;
+}
+
+#error-alert {
+    background-color: indianred;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    margin: 10px;
+}
+
+#error-alert .closebtn {
+    margin-left: 10px;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#addNewDevice {
+    min-width: 100px;
+}
+
+#input-container, #output-container {
+    display: flex;
+    margin: 10px;
+}
+
+#output-container {
+    flex-direction: column;
+}
+
+#input-container {
+    max-width: 400px;
+    flex-direction: row;
+}
+
+.tasks-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.headertasks-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.headertasks-container h2 {
+    padding: 10px;
+    margin: 10px;
+}
+
+.headertasks-container button {
+    padding: 10px;
+    margin: 10px;
+}
+
+.schedule {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.schedule div {
+    margin-top: 5px;
+}
+
+#template-container {
+    display: flex;
+    padding: 0 30px 20px 30px;
+    border-radius: 3px;
+    border: 1px solid lightgray;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.existingtemplates-container {
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    padding: 0 30px 10px 10px;
+}
+
+.templates-list {
+    display: block;
+}
+
+.templates-list-item {
+    display: block;
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+    list-style-type: none;
+}
+
+.templates-list-item:hover {
+    background-color: #00467A;
 }
 
 #visualization {
@@ -8,26 +128,7 @@ body {
     border: 1px solid lightgray;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: auto auto;
-    column-gap: 50px;
-    margin-bottom: 10px;
-}
-
-/* Form */
-form div {
-    margin-left: 10px;
-    flex-direction: column;
-    padding: 5px;
-}
-
 /* Schedule */
-.schedule {
-    display: flex;
-    flex-direction: row;
-    padding: 5px;
-}
 
 .deviceSchedule {
     display: flex;
@@ -47,12 +148,18 @@ form div {
     text-align: left;
 }
 
+#new-schedule-button {
+    margin-bottom: 10px;
+}
+
 /* Button */
 #addDevice {
     margin-bottom: 10px;
 }
-#confirmForm #templateConfirmForm{
-    margin-left: 30px;
+
+.vis-time-axis .vis-text {
+    color: white;
+    margin-bottom: 10px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -60,13 +167,19 @@ form div {
         background-color: #ffffff;
         color: #222;
     }
+
     .deviceSchedule th {
         background-color: #dae4e7;
         color: black;
     }
-    .deviceSchedule tr:nth-child(even){background-color: lightgray;}
 
-    .deviceSchedule tr:hover {background-color: darkgray;}
+    .deviceSchedule tr:nth-child(even) {
+        background-color: lightgray;
+    }
+
+    .deviceSchedule tr:hover {
+        background-color: darkgray;
+    }
 }
 
 .loader {
@@ -79,9 +192,18 @@ form div {
     margin-left: 20px;
 }
 
+#templateForm {
+    display: flex;
+    flex-direction: column;
+}
+
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -94,8 +216,16 @@ form div {
         background-color: #1c1a1a;
         color: white;
     }
-    .deviceSchedule tr:nth-child(even){background-color: grey;}
-    .deviceSchedule tr:nth-child(odd){background-color: dimgrey;}
 
-    .deviceSchedule tr:hover {background-color: dimgrey;}
+    .deviceSchedule tr:nth-child(even) {
+        background-color: grey;
+    }
+
+    .deviceSchedule tr:nth-child(odd) {
+        background-color: dimgrey;
+    }
+
+    .deviceSchedule tr:hover {
+        background-color: dimgrey;
+    }
 }

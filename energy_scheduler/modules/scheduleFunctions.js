@@ -6,16 +6,39 @@ document.getElementById("createSchedule").addEventListener("click", async (event
     await createSchedule();
 });
 
+document.getElementById("new-schedule-button").addEventListener("click", async (event) => {
+    event.preventDefault();
+    document.getElementById("input-container").style.display = "flex";
+    document.getElementById("output-container").style.display = "none";
+});
+
+document.getElementById("current-schedule-button").addEventListener("click", async (event) => {
+    event.preventDefault();
+    document.getElementById("input-container").style.display = "none";
+    document.getElementById("output-container").style.display = "flex";
+});
+
 export async function createSchedule() {
     const loader = document.getElementById("loader");
-    const error = document.getElementById("error");
     loader.style.display = 'block';
     let schedule;
     const startSchedule = document.getElementById("startSchedule").value;
     const endSchedule = document.getElementById("endSchedule").value;
     const scheduleTime = document.getElementById("scheduleTime").value;
-    if (startSchedule === "" || endSchedule === "") {
-        error.style.display = 'block';
+    if (startSchedule === "" || endSchedule === "" || scheduleTime === "") {
+        document.getElementById("error-alert").style.display = "block";
+        document.getElementById("error-alert").innerHTML += "Please fill in both start and end schedule date";
+        loader.style.display = 'none';
+        return;
+    } else if (startSchedule > endSchedule) {
+        document.getElementById("error-alert").style.display = "block";
+        document.getElementById("error-alert").innerHTML += "Start date cannot be after end date";
+        loader.style.display = 'none';
+        return;
+    }
+    if (scheduleTime === "") {
+        document.getElementById("error-alert").style.display = "block";
+        document.getElementById("error-alert").innerHTML += "Please fill time for schedule";
         loader.style.display = 'none';
         return;
     }
@@ -36,10 +59,15 @@ export async function createSchedule() {
         }
         mySolarWattageList.push(solarWattage);
     }
-    error.style.display = 'none';
+    let devices = await axios.get('http://homeassistant.local:3001/devices', {
+        headers: {
+            'Authorization':
+                `Bearer ${window.token}`
+        }
+    });
     try {
-        await axios.post(`http://homeassistant.local:${window.backendPort}/api/schedule`, {
-            deviceList: window.myDevices,
+        await axios.post(`http://homeassistant.local:8080/api/schedule`, {
+            deviceList: devices.data,
             startTime: startSchedule,
             endTime: endSchedule,
             solarWattageList: mySolarWattageList,
@@ -55,6 +83,8 @@ export async function createSchedule() {
         });
     } catch (errors) {
         console.error(errors);
+        document.getElementById("error-alert").style.display = "block";
+        document.getElementById("error-alert").innerHTML += "failed to create schedule, please check logs";
     }
     const scheduleList = schedule.deviceUsageDtos;
     await deleteSchedule();
@@ -67,7 +97,7 @@ export async function createSchedule() {
     }
     await showSchedule();
     loader.style.display = 'none';
-
+    document.getElementById("current-schedule-button").style.display = "block";
 }
 
 export const deleteSchedule = async () => {
@@ -94,7 +124,7 @@ export const postSchedule = async schedule => {
             name: schedule.name,
             wattage: schedule.wattage,
             start: schedule.start,
-            end: schedule.end
+            end: schedule.end,
         }, {
             headers: {
                 'Authorization':
@@ -124,6 +154,8 @@ function removeDuplicates(arr) {
 }
 
 export async function showSchedule() {
+    document.getElementById("input-container").style.display = "none";
+    document.getElementById("output-container").style.display = "flex";
     const scheduleList = await getSchedule();
     let times = [];
     if (scheduleList.length > 0) {
