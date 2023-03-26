@@ -4,6 +4,7 @@ import {
     showTemplateDevices
 } from "./modules/deviceFunctions.js";
 import {getSolarData} from "./modules/solarDataFunctions.js";
+import {createdSchedule} from "./modules/scheduleFunctions.js";
 
 async function getOptions() {
     await fetch('data.json', {
@@ -32,3 +33,4 @@ await getSolarData(window.latitude, window.longitude, window.declination, window
 await getStates();
 await getTemplateDevices();
 await showTemplateDevices();
+await createdSchedule();

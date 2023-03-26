@@ -23,7 +23,6 @@ export async function showForm(device) {
         selectList.appendChild(option);
     }
     if (device !== undefined) {
-        console.log(device);
         document.getElementById("templateDevices").value = device.id;
         document.getElementById("templateDevices").options[document.getElementById("templateDevices").selectedIndex].text = device.friendly_name;
         document.getElementById("templateConsumption").value = device.consumption;

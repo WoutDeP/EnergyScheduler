@@ -100,6 +100,26 @@ export async function createSchedule() {
     document.getElementById("current-schedule-button").style.display = "block";
 }
 
+export async function createdSchedule() {
+    const scheduleList = await getSchedule();
+    if (scheduleList.length > 0) {
+        document.getElementById("current-schedule-button").style.display = "block";
+        let times = [];
+        if (scheduleList.length > 0) {
+            for (let i = 0; i < scheduleList.length; i++) {
+                if (scheduleList[i].start !== null) {
+                    times.push(scheduleList[i].start);
+                    times.push(scheduleList[i].end);
+                }
+            }
+        }
+        let allTimes = removeDuplicates(times).sort();
+
+        await loadTimeline(scheduleList);
+        await createEnergyComparison(allTimes, scheduleList);
+    }
+}
+
 export const deleteSchedule = async () => {
     const scheduleList = await getSchedule();
     for (let i = 0; i < scheduleList.length; i++) {

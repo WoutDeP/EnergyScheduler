@@ -245,16 +245,11 @@ async function changeSelectedDevices(device) {
         let selectedDevices = await getDevices();
 
         let hasname = false;
-        console.log(device.id);
         for (let i = 0; i < selectedDevices.length; i++) {
             if (selectedDevices[i].id === device.id) {
-                console.log(selectedDevices[i].id);
-                console.log(selectedDevices[i]);
                 hasname = true;
             }
         }
-
-        console.log(hasname);
 
         if (hasname === false) {
             currentDevice.style.backgroundColor = "#0070C0";
@@ -322,8 +317,6 @@ export async function addTemplateDevice() {
 
         const templates = document.getElementById("templates-list");
         let alreadyExists = false;
-        console.log(friendly_name);
-        console.log(templates.children);
         for (let i = 0; i < templates.children.length; i++) {
             if (templates.children[i].innerHTML === friendly_name) {
                 alreadyExists = true;
