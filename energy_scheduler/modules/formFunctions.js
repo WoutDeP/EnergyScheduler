@@ -28,9 +28,13 @@ export async function showForm(device) {
         document.getElementById("templateStartTime").value = device.startTime;
         document.getElementById("templateEndTime").value = device.endTime;
         document.getElementById("templateDuration").value = device.duration;
-        document.getElementById("templateObligatory").checked = device.obligatory;
         document.getElementById("templateImportance").value = device.importance;
-        document.getElementById("templateSplittable").checked = device.splittable;
+        if (device.obligatory === "true") {
+            document.getElementById("templateObligatory").checked = true;
+        }
+        if (device.splittable === "true") {
+            document.getElementById("templateSplittable").checked = true;
+        }
     } else {
         document.getElementById("templateDevices").value = null;
         document.getElementById("templateDevices").options[document.getElementById("templateDevices").selectedIndex].text = null;

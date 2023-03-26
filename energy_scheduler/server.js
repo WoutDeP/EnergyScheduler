@@ -15,7 +15,7 @@ const path = require('path');
 
 const supervisor_token = process.env.SUPERVISOR_TOKEN;
 const port = process.env.PORT || 8099; // use the port defined in the environment variable, or 8080 by default
-const addon_name = 'energy_scheduler';
+const addon_name = '8a8ad546_energy_scheduler';
 const myOptionValue = addonConfig.auth_token;
 const latitude = addonConfig.latitude;
 const longitude = addonConfig.longitude;
