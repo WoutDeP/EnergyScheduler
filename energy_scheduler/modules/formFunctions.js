@@ -6,8 +6,10 @@ document.getElementById("templateConfirmForm").addEventListener("click", async (
     await addTemplateDevice();
 });
 
-document.getElementById("addNewDevice").addEventListener('click', showForm);
-
+document.getElementById("addNewDevice").addEventListener('click', function(event) {
+    event.stopPropagation();
+    showForm();
+});
 export async function showForm(device) {
     document.getElementById("template-container").style.display = 'flex';
     const selectList = document.getElementById("templateDevices");
@@ -37,7 +39,6 @@ export async function showForm(device) {
         }
     } else {
         document.getElementById("templateDevices").value = null;
-        document.getElementById("templateDevices").options[document.getElementById("templateDevices").selectedIndex].text = null;
         document.getElementById("templateConsumption").value = null;
         document.getElementById("templateStartTime").value = null;
         document.getElementById("templateEndTime").value = null;
