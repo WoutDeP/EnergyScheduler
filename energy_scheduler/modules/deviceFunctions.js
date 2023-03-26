@@ -123,6 +123,7 @@ export async function showDevices() {
     let children = allDevices.children;
     for (let i = 0; i < children.length; i++) {
         children[i].style.backgroundColor = null;
+        children[i].style.color = null;
     }
     const currentDevices = await axios.get('http://homeassistant.local:3001/devices', {
         headers: {
@@ -135,6 +136,7 @@ export async function showDevices() {
         for (let j = 0; j < children.length; j++) {
             if (children[j].innerHTML === listOfDevices[i].friendly_name) {
                 children[j].style.backgroundColor = "#0070C0";
+                children[j].style.color = "white";
             }
         }
     }
@@ -214,10 +216,12 @@ export async function showTemplateDevices() {
             templateli.className = "templates-list-item";
             templateli.innerText = templates[i].friendly_name;
             templateli.style.backgroundColor = null;
+            templateli.style.color = null;
             const chosenDevices = await getDevices();
             for (let j = 0; j < chosenDevices.length; j++) {
                 if (chosenDevices[j].friendly_name === templates[i].friendly_name) {
                     templateli.style.backgroundColor = "#0070C0";
+                    templateli.style.color = "white";
                 }
             }
             templatesList.appendChild(templateli);
@@ -254,10 +258,12 @@ async function changeSelectedDevices(device) {
 
         if (hasname === false) {
             currentDevice.style.backgroundColor = "#0070C0";
+            currentDevice.style.color = "white";
             await postDevice(device);
             await showForm(device);
         } else {
             currentDevice.style.backgroundColor = null;
+            currentDevice.style.color = null;
             document.getElementById("template-container").style.display = "none";
             await deleteDevice(selectedDevices.find(x => x.id === device.id).id);
         }

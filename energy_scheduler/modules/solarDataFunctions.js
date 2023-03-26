@@ -29,7 +29,14 @@ export async function getSolarData(latitude, longitude, declination, azimuth, kw
             }
         }
     }
-    const solarData = await axios.get('https://api.forecast.solar/estimate/' + latitude + '/' + longitude + '/' + declination + '/' + azimuth + '/' + kwph);
+    let solarData;
+    try {
+        solarData = await axios.get('https://api.forecast.solar/estimate/' + latitude + '/' + longitude + '/' + declination + '/' + azimuth + '/' + kwph)
+    } catch (errors) {
+        console.error(errors);
+        document.getElementById("error-alert").style.display = "block";
+        document.getElementById("error-alert").innerHTML += "Error getting solar data: Please check user configurations";
+    }
     const keys = Object.keys(solarData.data.result.watt_hours_period);
     const values = Object.values(solarData.data.result.watt_hours_period);
 
