@@ -10,8 +10,8 @@
 ![Supports armv7 Architecture][armv7-shield]
 ![Supports i386 Architecture][i386-shield]
 
-![Energy Scheduler in the Home Assistant Frontend](images/screenshot.png)
-![Energy Scheduler in the Home Assistant Frontend](images/screenshot2.png)
+![Energy Scheduler in the Home Assistant Frontend](images/image1.png)
+![Energy Scheduler in the Home Assistant Frontend](images/image2.png)
 
 ## About
 
