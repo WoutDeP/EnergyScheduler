@@ -88,7 +88,6 @@ function calculateEnergyProduced() {
         energyProduced.push(0);
     }
     return energyProduced;
-
 }
 
 export async function createEnergyComparison(allTimes, scheduleList) {

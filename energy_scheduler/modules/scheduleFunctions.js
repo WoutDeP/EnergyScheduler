@@ -187,7 +187,6 @@ export async function showSchedule() {
         }
     }
     let allTimes = removeDuplicates(times).sort();
-
     await loadTimeline(scheduleList);
     await createEnergyComparison(allTimes, scheduleList);
 }
@@ -200,7 +199,6 @@ async function loadTimeline(devices) {
     }
     let groupDevices = [];
     let itemDevices = [];
-    let timeList = [];
     let allTimes = [];
     let date = new Date();
     for (let i = 0; i < devices.length; i++) {
