@@ -263,7 +263,6 @@ async function changeSelectedDevices(device) {
             document.getElementById("template-container").style.display = "none";
             await deleteDevice(selectedDevices.find(x => x.id === device.id).id);
         }
-        //TODO show template onclick li
     }
 }
 
@@ -275,9 +274,7 @@ export async function addTemplateDevice() {
     const consumption = document.getElementById("templateConsumption").value;
     let startTime = document.getElementById("templateStartTime").value;
     let endTime = document.getElementById("templateEndTime").value;
-    if (startTime > endTime) {
-        checkInputs += "Start time must be before end time";
-    }
+
     const duration = document.getElementById("templateDuration").value;
     let obligatory = document.getElementById("templateObligatory");
     let obligatoryValue;
@@ -299,11 +296,14 @@ export async function addTemplateDevice() {
         checkInputs += "Please fill in all * fields";
     }
 
-    if (startTime === "" || endTime === "") {
+    if (startTime === "") {
         startTime = "00:00";
     }
     if (endTime === "") {
         endTime = "23:59";
+    }
+    if (startTime > endTime) {
+        checkInputs += "Start time must be before end time";
     }
     if (importance === "") {
         importance = "0";
