@@ -21,6 +21,9 @@ With the increasing popularity of solar power, more people are interested in uti
 
 For example, if the solar energy production is high in the middle of the day, Energy Scheduler may recommend running energy-intensive appliances like washing machines or dishwashers during that time. This helps to reduce reliance on grid electricity and optimize the use of renewable energy.
 
+## Planning tool
+https://github.com/WoutDeP/PlanningTool/tree/main/home-assistant-planning-tool
+
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [armhf-shield]: https://img.shields.io/badge/armhf-yes-green.svg
